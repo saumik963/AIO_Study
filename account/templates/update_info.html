@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+{% block title %}Update{% endblock %}
+{% block header %}Update Info{% endblock %}
+
+{% block body %}
+
+{% comment %} {% for fm in form %}
+{{fm.label_tag}}
+{{fm}}
+{{fm.errors }}
+{% endfor %} {% endcomment %}
+
+
+  <main class="main-content  mt-0">
+    <section class="min-vh-100 mb-8">
+      <div class="page-header align-items-start min-vh-50 pt-4 pb-11 m-3 border-radius-lg" style="background-image: url('/static/img/curved-images/curved14.jpg');">
+        <span class="mask bg-gradient-dark opacity-6"></span>
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-lg-5 text-center mx-auto">
+              <h1 class="text-white mb-2 mt-2">Welcome!</h1>
+              <p class="text-lead text-white">Use these awesome forms to login or create new account in your project for free.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="row mt-lg-n10 mt-md-n11 mt-n10">
+          <div class="col-xl-4 col-lg-5 col-md-7 mx-auto">
+            <div class="card z-index-0" style="
+            background-color: #0c0c0c;
+        ">
+              <div class="card-header text-center pt-4" style="
+              background-color: #0c0c0c;
+          ">
+                <h5 style="color: azure">Update Info</h5>
+              </div>
+              <div class="card-body">
+
+                <form enctype="multipart/form-data" method='post' role="form text-left">
+                  {% csrf_token %}
+
+                  {% comment %} {{form.as_p}} {% endcomment %}
+
+                  <div class="mb-3">
+                    
+                    <input style="background-color: #00000070;color: azure;" type="text" name="username" value="{{username}}"  class="form-control" placeholder="Username" aria-label="" aria-describedby="email-addon" >
+                  </div>
+
+                  <div class="mb-3">
+         
+                    <input style="background-color: #00000070;color: azure;" type="text" name="first_name" value="{{first_name}}"  class="form-control" placeholder="First name" aria-label="{{form.id_first_name}}" aria-describedby="email-addon" >
+                  </div>
+
+                  <div class="mb-3">
+            
+                    <input style="background-color: #00000070;color: azure;" type="text" name="last_name" value="{{last_name}}"  class="form-control" placeholder="Last name" aria-label="{{form.id_last_name}}" aria-describedby="email-addon" >
+                  </div>
+
+                  <div class="mb-3">
+                    <input style="background-color: #00000070;color: azure;" type="email" name="email" value="{{email}}"  class="form-control" placeholder="Email" aria-label="{{form.id_email}}" aria-describedby="email-addon" >
+                  </div>
+                  
+                  <div class="mb-3">
+                    <textarea style='background-color:#00000070;color: azure;' name="bio"  rows="4" class="form-control" placeholder="Write your Bio." >{{bio}}</textarea>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="dp">Upload a Profile picture.</label>
+                    <div class="input-group">
+                        <input style='background-color:#00000070;' type="file" name='dp' id="dp" class="form-control" ng-model="images" ng-click="browse()" accept="image/*">
+                    </div>
+                    <button type="reset" class="btn btn-default" ng-click="reset()">Reset</button>
+                </div>
+                  
+                  <div class="text-center">
+                    <button type="submit" class="btn bg-gradient-dark w-100 my-4 mb-2">Update</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+  </main>
+  
+
+  <script>
+    document.getElementById('dp').addEventListener('change', function(event) {
+        var file = event.target.files[0];
+        if (file) {
+            var fileSize = file.size; // in bytes
+            var maxSizeInBytes = 1048576; // 1 MB
+            if (fileSize > maxSizeInBytes) {
+                alert('File size exceeds 1 MB. Please choose a smaller file.');
+                event.target.value = ''; // Clear the input field
+            }
+        }
+    });
+</script>
+
+{% endblock %}

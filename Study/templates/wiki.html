@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}Wiki Search{% endblock %}
+{% block header %}Wiki Search{% endblock %}
+{% block body %}
+
+{% comment %} search {% endcomment %}
+<h5 style="color: #d7e9e9ad;background-color: #0c0c0c;text-align: center;font-family: cursive;padding: 5px;border-radius: inherit;font-family: 'Quicksand', sans-serif;">You may use this search engine to look up Wikipedia.</h5>
+<div class="d-flex justify-content-center align-items-center">
+  <form method="post" class="form-inline">
+    {% csrf_token %}
+    <div class="input-group" style="
+    margin: 30px;
+">
+      <input style='background-color:#00000070;' name="text" class="form-control border-0 rounded-pill" type="search" placeholder="Search here" aria-label="Search">
+      <button type="submit" style="border-bottom-right-radius: 20px;border-top-right-radius: 20px;background-color: aqua;border: aliceblue;width: 50px;">
+        <i class="fas fa-search"></i>
+      </button>
+    </div>
+  </form>
+</div>
+
+
+{% comment %} search {% endcomment %}
+
+
+<div class="card text-center" style='background-color:#00000070;color:azure;'>
+    
+    <div class="card-body">
+      <h5 style="color: #d7e9e9ad;" class="card-title">{{title}}</h5>
+      <h5 >{{link}}</h5>
+      <p class="card-text">{{details}}</p>
+      <a href="{{link}}" target="_blank" class="btn btn-primary">Learn More</a>
+    </div>
+  </div>
+
+
+{% endblock %}

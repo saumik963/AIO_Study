@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}Post Details{% endblock %}
+{% block header %}Post Details{% endblock %}
+{% block head %}
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@100&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Mooli&family=Roboto+Mono:wght@100&display=swap');
+ 
+</style>
+{% endblock %}
+{% block body %}
+
+
+<div class="card text-center" style="background-color: #00000070;">
+    
+    <div class="card-body" >
+      <h5 class="card-title" style='color: azure;'>{{ post.PostTitle }}</h5>
+      <p class="card-text" style="
+      white-space: break-spaces;
+      ">{{ post.Description }}</p>
+    </div>
+    <h5 style="
+    margin-right: 75%;
+    font-size: small;
+    font-family: 'Mooli', sans-serif;color: #f3f3f36b;
+">Posted by: {{post.user.username}}</h5>
+  </div>
+
+{% endblock %}

@@ -1,0 +1,295 @@
+{% extends "base.html" %}
+{% block title %}Public Post{% endblock %}
+{% block header %}Public Post{% endblock %}
+
+
+
+{% block head %}
+<style>
+
+  
+    @import url('https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Mooli&family=Roboto+Mono:wght@100&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@100&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Mooli&family=Roboto+Mono:wght@100&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300&display=swap');
+
+
+  .pagination-outer{ text-align: center; }
+.pagination{
+    font-family: 'Ubuntu', sans-serif;
+    display: inline-flex;
+    position: relative;
+}
+.pagination li a.page-link{
+    color: #333;
+    background-color: #e7e7e7;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 39px;
+    height: 40px;
+    width: 40px;
+    padding: 0;
+    margin: 0 5px;
+    border: none;
+    border-radius: 10px;
+    position: relative;
+    z-index: 1;
+    transition: all 0.3s ease 0s;
+}
+.pagination li a.page-link:hover,
+.pagination li a.page-link:focus,
+.pagination li.active a.page-link:hover,
+.pagination li.active a.page-link{
+    color: #fff;
+    background: transparent;
+}
+.pagination li a.page-link:before,
+.pagination li a.page-link:after{
+    content: '';
+    background: linear-gradient(to right, #706fd3 50%, transparent 50%);
+    height: 100%;
+    width: 100%;
+    border-radius: 30%;
+    opacity: 0;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: -1;
+    transition: all 0.4s ease 0s;
+}
+.pagination li a.page-link:after{
+    background: linear-gradient(to right, #474787 50%, transparent 50%);
+    transform: rotateY(180deg);
+    top: auto;
+    bottom: 0;
+}
+.pagination li a.page-link:hover:before,
+.pagination li a.page-link:focus:before,
+.pagination li.active a.page-link:before,
+.pagination li a.page-link:hover:after,
+.pagination li a.page-link:focus:after,
+.pagination li.active a.page-link:after{
+    height: 85%;
+    opacity: 1;
+}
+@media only screen and (max-width: 480px){
+    .pagination{
+        font-size: 0;
+        border: none;
+        display: inline-block;
+    }
+    .pagination li{
+        display: inline-block;
+        vertical-align: top;
+        margin: 0 0 10px;
+    }
+}
+</style>
+{% endblock %}
+{% block body %}
+
+
+
+{% comment %} search {% endcomment %}
+<h4 style="color: #d7e9e9ad;background-color: #0c0c0c;text-align: center;font-family: cursive;padding: 5px;border-radius: inherit;font-family: 'Quicksand', sans-serif;
+">You may use this search engine to look up public posts.</h4>
+<div class="d-flex justify-content-center align-items-center">
+  <form method="get" class="form-inline">
+    {% csrf_token %}
+    <div class="input-group" style="
+    margin: 30px;
+">
+      <input style='background-color: #00000070;' name="searchPost" class="form-control border-0 rounded-pill" type="search" placeholder="Search by post title" aria-label="Search">
+      <button type="submit" style="border-bottom-right-radius: 20px;border-top-right-radius: 20px;background-color: aqua;border: aliceblue;width: 50px;">
+        <i class="fas fa-search"></i>
+      </button>
+    </div>
+  </form>
+{% if user.is_authenticated %}
+  <a  href="{%url "Post" %}" class="btn btn-outline-dark"style="
+  margin: 0px 0px 35px 55%;
+  padding: 10px 10px 1px 20px;">Post 
+  <div class="icon icon-shape shadow text-center border-radius-md" style="background-color: azure;margin: -6px -6px 5px 10px;width: 35px;
+  height: 35px;">
+  <svg style="margin: 8px;" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-file-post" viewBox="0 0 16 16">
+    <path d="M4 3.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-.5.5h-7a.5.5 0 0 1-.5-.5v-8z"></path>
+    <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2zm10-1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1z"></path>
+  </svg>
+</div></a>
+{% endif %}
+</div>
+
+{% comment %} search {% endcomment %}
+
+
+{% comment %} {% if posts %}
+<div class="row" style='margin:auto;'>
+{% for post in posts  %}
+
+<div class="col-md-4 mb-4">
+    <div class="card h-100">
+      <div class="card-body p-3 text-center">
+        {% if post.image %}
+        <img src="{{ post.image.url }}" alt="" class="img-fluid" style="border-radius: 20px;">
+    {% else %}
+        <p>No image available</p>
+    {% endif %}
+      
+      <h6 class="mt-3 mb-0"> <a href="{%url "post_detail" id=post.id %}"> Post Title: {{post.PostTitle}}</a></h6>
+      <span style="
+      display: -webkit-box;
+      -webkit-line-clamp: 5;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+  " class="text-xs">Description: {{post.Description}}</span>
+      <hr class="horizontal dark my-3">
+      <h6 class="mt-3 mb-0">Posted by: {{ post.user.username }}</h6>
+      </div>
+    </div>
+  </div>
+{% endfor %}
+</div> {% endcomment %}
+
+
+{% if posts %}
+<div class="row" style='margin:auto;'>
+{% for post in posts %}
+
+<div class="card" style="width: 18rem;margin:15px; background-color: #00000070;">
+  {% if post.image %}
+  <img class="card-img-top" src="{{ post.image.url }}" alt="Card image cap">
+  {% else %}
+        <p>No image available</p>
+    {% endif %}
+
+  <div class="card-body">
+    <h5 class="card-title">{{post.PostTitle}}</h5>
+    <p style="
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;" class="card-text">{{post.Description}}</p>
+    <p class="card-text">{{post.update_at}}</p>
+
+    <a href="{%url "post_detail" id=post.id %}" class="btn btn-primary">Read more</a>
+  </div>
+</div>
+
+{% endfor %}
+
+
+{% comment %} pagination {% endcomment %}
+
+{% comment %} <nav class="mt-4" aria-label="Page navigation sample">
+  {% if posts.has_other_pages %}
+  <ul class="pagination justify-content-center">
+
+    {% if posts.has_previous %}
+    <li class="page-item">
+
+      <a class="page-link" href="?page={{posts.previous_page_number}}">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left-circle" viewBox="0 0 16 16">
+          <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-4.5-.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z"/>
+        </svg></a>
+    </li>
+    {% else %}
+    <li class="page-item disabled">
+      <a class="page-link" href="#">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left-circle" viewBox="0 0 16 16">
+          <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-4.5-.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z"/>
+        </svg></a>
+    </li>
+    {% endif %} 
+    {% for i in posts.paginator.page_range %} 
+
+    {% if posts.number == i %}
+    <li class="page-item active">
+      <a class="page-link" href="#">{{i}}</a>
+    </li>
+
+    {% else %}
+    <li class="page-item">
+      <a class="page-link" href="?page={{i}}">{{i}}</a>
+    </li>
+    {% endif %} {% endfor %} 
+    
+    {% if posts.has_next %}
+    <li class="page-item">
+      <a class="page-link" href="?page={{posts.next_page_number}}"
+        ><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-circle" viewBox="0 0 16 16">
+          <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"/>
+        </svg></a
+      >
+    </li>
+    {% else %}
+    <li class="page-item disabled">
+
+      <a class="page-link" href="#"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-circle" viewBox="0 0 16 16">
+  <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"/>
+</svg></a>
+
+    </li>
+    {% endif %}
+  </ul>
+  {% endif %}
+</nav> {% endcomment %}
+
+{% comment %} pagination {% endcomment %}
+
+
+<div class="demo">
+  <nav class="pagination-outer" aria-label="Page navigation">
+  {% if posts.has_other_pages %}
+
+      <ul class="pagination">
+    {% if posts.has_previous %}
+
+          <li class="page-item">
+              <a href="?page={{posts.previous_page_number}}" class="page-link" aria-label="Previous">
+                  <span aria-hidden="true">«</span>
+              </a>
+          </li>
+    {% else %}
+    <li class="page-item disabled">
+      <a href="#" class="page-link" aria-label="Previous">
+          <span aria-hidden="true">«</span>
+      </a>
+  </li>
+  {% endif %}
+    {% for i in posts.paginator.page_range %} 
+    {% if posts.number == i %}
+    <li class="page-item active"><a class="page-link" href="#">{{i}}</a></li>
+    {% else %}
+    <li class="page-item"><a class="page-link" href="?page={{i}}">{{i}}</a></li>
+
+    {% endif %} {% endfor %} 
+
+    {% if posts.has_next %}
+          
+          <li class="page-item">
+              <a href="?page={{posts.next_page_number}}" class="page-link" aria-label="Next">
+                  <span aria-hidden="true">»</span>
+              </a>
+          </li>
+        {% else %}
+        <li class="page-item disabled">
+          <a href="#" class="page-link" aria-label="Next">
+              <span aria-hidden="true">»</span>
+          </a>
+      </li>
+      {% endif %}
+
+      </ul>
+    {% endif %}
+  </nav>
+</div>
+
+
+
+
+{% else %}
+<h6 class="mt-3 mb-0">Currently No Post Available</h6>
+
+{% endif %}
+
+{% endblock %}
