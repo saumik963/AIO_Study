@@ -1,2 +1,2 @@
 .env
-/staticfiles_build/
+**/staticfiles_build/
