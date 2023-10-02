@@ -22,6 +22,7 @@ from django.views.static import serve
 from django.urls import re_path as url
 from django.conf.urls import handler404, handler500
 from Study.views import error_404, error_500
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 urlpatterns = [
     url(r'^media/(?P<path>.*)$', serve,
         {'document_root': settings.MEDIA_ROOT}),
