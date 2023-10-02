@@ -21,7 +21,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get("SECRET_KEY")
+SECRET_KEY = process.env.SECRET_KEY
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
@@ -88,12 +88,12 @@ WSGI_APPLICATION = 'AIOstudy.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': os.environ.get("ENGINE"),
-        'NAME': os.environ.get("NAME"),
-        'USER': os.environ.get("USER"),
-        'PASSWORD': os.environ.get("PASSWORD"),
-        'HOST': os.environ.get("HOST"),
-        'PORT': os.environ.get("PORT"),
+        'ENGINE': process.env.ENGINE,
+        'NAME': process.env.NAME,
+        'USER': process.env.USER,
+        'PASSWORD': process.env.PASSWORD,
+        'HOST': process.env.HOST,
+        'PORT': process.env.PORT,
     }
 }
 
