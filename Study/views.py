@@ -137,7 +137,7 @@ def Videos(request):
         if request.method == "POST":
             form = search()
             text = request.POST['text']
-            video = VideosSearch(text, limit=15)
+            video = VideosSearch(text, limit=16)
             result_list = []
             for i in video.result()['result']:
                 result_dict = {

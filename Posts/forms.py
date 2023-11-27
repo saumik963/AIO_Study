@@ -1,6 +1,5 @@
 from django import forms
-from django.forms import widgets
-from .models import Post
+from .models import Post,PostImages
 
 
 class PostForm(forms.ModelForm):
@@ -8,4 +7,9 @@ class PostForm(forms.ModelForm):
 
     class Meta:
         model = Post
-        fields = ['PostTitle', 'Description', 'image', 'is_post']
+        fields = ['PostTitle', 'Description', 'Coverimage', 'is_post']
+
+class PostImagesForm(forms.ModelForm):
+    class Meta:
+        model = PostImages
+        fields = ['images']

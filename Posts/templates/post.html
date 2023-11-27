@@ -30,23 +30,23 @@
         </div>
       </div>
 
-      {% comment %} <div class="form-group">
-        <label class="form-control-label">Upload an Image</label>
-        <div class="custom-file">
-            <input type="file" class="custom-file-input" id="myFile" name="image">
-            <label class="custom-file-label" for="myFile">Choose file</label>
-        </div>
-    </div>
-     {% endcomment %}
-
-
+  {% comment %} coverImage {% endcomment %}
      <div class="form-group">
-        <label for="fileName">Select an image file</label>
+        <label >Select Post Cover Image</label>
             <div class="input-group">
-            <input style='background-color:#00000070;' type="file" name='image' id="image" class="form-control" readonly ng-model="images" ng-click="browse()">
+            <input style='background-color:#00000070;' type="file" name='Coverimage' class="form-control" readonly ng-model="images" ng-click="browse()">
             </div>
-             <button type="reset" class="btn btn-default" ng-click="reset()">Reset</button>
     </div>
+
+  {% comment %} Multiple images {% endcomment %}
+
+    <div class="form-group">
+      <label >Select Images For Post</label>
+          <div class="input-group">
+          <input style='background-color:#00000070;' type="file" name='images' multiple  class="form-control" readonly ng-model="images" ng-click="browse()">
+          </div>
+           <button type="reset" class="btn btn-default" ng-click="reset()">Reset</button>
+  </div>
 
 
       <div class="form-group">

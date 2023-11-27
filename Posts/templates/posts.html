@@ -156,19 +156,15 @@
 {% for post in posts %}
 
 <div class="card" style="width: 18rem;margin:15px; background-color: #00000070;">
-  {% if post.image %}
-  <img class="card-img-top" src="{{ post.image.url }}" alt="Card image cap">
+  {% if post.Coverimage %}
+  <img style='width: auto;height: 150px;object-fit: cover;margin-top: 5%;border-radius: 20px;' class="card-img-top" src="{{ post.Coverimage.url }}" alt="Card image cap">
   {% else %}
         <p>No image available</p>
     {% endif %}
 
   <div class="card-body">
     <h5 class="card-title">{{post.PostTitle}}</h5>
-    <p style="
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;" class="card-text">{{post.Description}}</p>
+    <p class="card-text">{{post.Description|truncatechars:50}}</p>
     <p class="card-text">{{post.update_at}}</p>
 
     <a href="{%url "post_detail" id=post.id %}" class="btn btn-primary">Read more</a>
