@@ -2770,13 +2770,8 @@ progress {
 }
 
 .form-control:focus {
-<<<<<<< HEAD
   color: #b6babe;
   background-color: #0c0c0c;
-=======
-  color: #495057;
-  background-color: #fff;
->>>>>>> d66e195d0d0125032295095ecbc08a3042446d47
   border-color: #183885;
   outline: 0;
   box-shadow: 0 0 0 2px #032039b5;
@@ -8736,11 +8731,7 @@ fieldset:disabled .btn {
 }
 
 .border {
-<<<<<<< HEAD
   border: 1px solid #383a3c !important;
-=======
-  border: 1px solid #dee2e6 !important;
->>>>>>> d66e195d0d0125032295095ecbc08a3042446d47
 }
 
 .border-0 {
@@ -23340,13 +23331,8 @@ html {
 }
 
 .navbar-vertical .navbar-nav>.nav-item .nav-link.active {
-<<<<<<< HEAD
   color: #b0b3b9;
   background-color: rgb(24, 26, 27);
-=======
-  color: #344767;
-  background-color: #fff;
->>>>>>> d66e195d0d0125032295095ecbc08a3042446d47
 }
 
 .navbar-vertical .navbar-nav>.nav-item .nav-link.active .icon {

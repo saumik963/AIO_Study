@@ -1,9 +1,5 @@
 from django.contrib import admin
-<<<<<<< HEAD
 from .models import Post, PostImages,Comments
-=======
-from .models import Post, PostImages
->>>>>>> d66e195d0d0125032295095ecbc08a3042446d47
 
 class PostImagesAdmin(admin.StackedInline):
     model = PostImages
@@ -18,10 +14,7 @@ class PostAdmin(admin.ModelAdmin):
 @admin.register(PostImages)
 class PostImagesAdmin(admin.ModelAdmin):
     pass
-<<<<<<< HEAD
 
 @admin.register(Comments)
 class CommentsAdmin(admin.ModelAdmin):
     list_display=['user','post','review','created_at']
-=======
->>>>>>> d66e195d0d0125032295095ecbc08a3042446d47

@@ -7,10 +7,7 @@ urlpatterns = [
     path('public/<int:id>/', views.public, name='public'),
     path('DeletePost/<int:id>/', views.DeletePost, name='DeletePost'),
     path('edit_post/<int:id>/', views.edit_post, name='edit_post'),
-<<<<<<< HEAD
     path('comment/<int:id>/', views.Comment.as_view(), name='comment'),
     # path('commentDelete/<int:id>/', views.CommentDelete.as_view(), name='commentDelete'),
     path('commentDelete/<int:pk>/', views.CommentDelete.as_view(), name='comment_delete'),
-=======
->>>>>>> d66e195d0d0125032295095ecbc08a3042446d47
 ]

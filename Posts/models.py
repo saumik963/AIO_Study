@@ -1,9 +1,6 @@
 from django.db import models
 from django.contrib.auth import get_user_model
-<<<<<<< HEAD
 from ckeditor.fields import RichTextField
-=======
->>>>>>> d66e195d0d0125032295095ecbc08a3042446d47
 
 User = get_user_model()
 # Create your models here.
@@ -12,11 +9,7 @@ User = get_user_model()
 class Post(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     PostTitle = models.CharField(max_length=100)
-<<<<<<< HEAD
     Description = RichTextField(null=True, blank=True)
-=======
-    Description = models.CharField(max_length=10000)
->>>>>>> d66e195d0d0125032295095ecbc08a3042446d47
 
     Coverimage = models.ImageField(blank=True, upload_to='CoverPhotos')
 
@@ -32,7 +25,6 @@ class PostImages(models.Model):
     images=models.ImageField(upload_to='PostImages')
 
     def __str__(self) :
-<<<<<<< HEAD
         return self.post.PostTitle
     
 
@@ -44,6 +36,3 @@ class Comments(models.Model):
 
     def __str__(self):
         return self.review
-=======
-        return self.post.PostTitle
->>>>>>> d66e195d0d0125032295095ecbc08a3042446d47

@@ -1,6 +1,5 @@
 from django.core.paginator import Paginator
 from django.shortcuts import render, redirect, get_object_or_404
-<<<<<<< HEAD
 from .models import Post,PostImages,Comments
 from .forms import PostForm,PostImagesForm
 from django.contrib import messages
@@ -10,12 +9,6 @@ from django.views.generic.edit import CreateView,DeleteView
 from django.views.generic.list import ListView
 from django.urls import reverse_lazy
 
-=======
-from .models import Post,PostImages
-from .forms import PostForm,PostImagesForm
-from django.contrib import messages
-import os
->>>>>>> d66e195d0d0125032295095ecbc08a3042446d47
 
 
 
@@ -89,17 +82,11 @@ def View_posts(request):
 
 def post_detail(request, id):
     post = Post.objects.get(id=id)
-<<<<<<< HEAD
     comments= Comments.objects.filter(post=post)
 
     context = {
         'post': post,
         'comments': comments
-=======
-
-    context = {
-        'post': post,
->>>>>>> d66e195d0d0125032295095ecbc08a3042446d47
     }
     return render(request, 'detail_post.html', context)
 
@@ -120,7 +107,6 @@ def DeletePost(request, id):
     return redirect('profile')
 
 
-<<<<<<< HEAD
 
 
 def edit_post(request, id):
@@ -130,22 +116,10 @@ def edit_post(request, id):
     if post.Coverimage:
         previous_image_path = post.Coverimage.path
 
-=======
-def edit_post(request, id):
-    post = get_object_or_404(Post, pk=id)
-    # print("==>> ", post.Coverimage.path)
-    previous_image_path = None
-
-    if post.Coverimage.path:
-        previous_image_path = post.Coverimage.path
-
-
->>>>>>> d66e195d0d0125032295095ecbc08a3042446d47
     if request.method == "POST":
         form = PostForm(request.POST, request.FILES, instance=post)
 
         if form.is_valid():
-<<<<<<< HEAD
             new_image_uploaded = 'Coverimage' in request.FILES
 
             if new_image_uploaded:
@@ -155,15 +129,6 @@ def edit_post(request, id):
                     print(f"File not found at: {previous_image_path}")
 
             form.save()
-=======
-            if len(previous_image_path) >0:
-                os.remove(previous_image_path)
-            else:
-                print(f"File not found at: {previous_image_path}")
-
-            form.save()
-            
->>>>>>> d66e195d0d0125032295095ecbc08a3042446d47
             messages.success(request, 'Post updated successfully.')
             return redirect('profile')
     else:
@@ -176,7 +141,6 @@ def edit_post(request, id):
 
     return render(request, 'edit_post.html', context)
 
-<<<<<<< HEAD
 
 class Comment(LoginRequiredMixin,CreateView):
     model = Comments
@@ -210,5 +174,3 @@ class CommentDelete(LoginRequiredMixin, DeleteView):
     def delete(self, request, *args, **kwargs):
         messages.success(self.request, "Comment deleted successfully.")
         return super().delete(request, *args, **kwargs)
-=======
->>>>>>> d66e195d0d0125032295095ecbc08a3042446d47
