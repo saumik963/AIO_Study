@@ -32,8 +32,11 @@ INSTALLED_APPS = [
     'account',
     'Study',
     'Posts',
+<<<<<<< HEAD
     'ckeditor',
     'django_ckeditor_5',
+=======
+>>>>>>> d66e195d0d0125032295095ecbc08a3042446d47
 ]
 
 MIDDLEWARE = [
@@ -134,6 +137,7 @@ MEDIA_ROOT = BASE_DIR / 'media'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+<<<<<<< HEAD
 
 
 CKEDITOR_CONFIGS = {
@@ -141,3 +145,5 @@ CKEDITOR_CONFIGS = {
         'toolbar': 'full',
     },
 }
+=======
+>>>>>>> d66e195d0d0125032295095ecbc08a3042446d47

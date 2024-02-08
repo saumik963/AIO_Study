@@ -6,8 +6,12 @@
 
 <div class="card draggable mb-4" style='background-color: #00000070;'>
     <form method="post" enctype="multipart/form-data" style="padding: 50px;">
+<<<<<<< HEAD
       {% csrf_token %}     
       {{form.media}} 
+=======
+      {% csrf_token %}      
+>>>>>>> d66e195d0d0125032295095ecbc08a3042446d47
 
       <hr class="horizontal dark my-4">
   
@@ -26,7 +30,11 @@
       <div>
         <div class="form-group">
           <label class="form-control-label">Post Description</label>
+<<<<<<< HEAD
           {{form.Description}}
+=======
+          <textarea style='background-color: #00000070; color:white;' name="Description" rows="4" class="form-control" placeholder="A few words about your task" required>{{post.Description}}</textarea>
+>>>>>>> d66e195d0d0125032295095ecbc08a3042446d47
           
         </div>
       </div>

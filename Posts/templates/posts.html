@@ -150,7 +150,11 @@
 {% endfor %}
 </div> {% endcomment %}
 
+<<<<<<< HEAD
 {% load custom_filters %}
+=======
+
+>>>>>>> d66e195d0d0125032295095ecbc08a3042446d47
 {% if posts %}
 <div class="row" style='margin:auto;'>
 {% for post in posts %}
@@ -162,6 +166,7 @@
         <p>No image available</p>
     {% endif %}
 
+<<<<<<< HEAD
     <div class="card-body">
       <h5 class="card-title">{{ post.PostTitle }}</h5>
       <p>{{ post.Description|strip_html|truncatechars:50 }}</p>
@@ -169,6 +174,15 @@
       <a href="{% url "post_detail" id=post.id %}" class="btn btn-primary">Read more</a>
   </div>
   
+=======
+  <div class="card-body">
+    <h5 class="card-title">{{post.PostTitle}}</h5>
+    <p class="card-text">{{post.Description|truncatechars:50}}</p>
+    <p class="card-text">{{post.update_at}}</p>
+
+    <a href="{%url "post_detail" id=post.id %}" class="btn btn-primary">Read more</a>
+  </div>
+>>>>>>> d66e195d0d0125032295095ecbc08a3042446d47
 </div>
 
 {% endfor %}
