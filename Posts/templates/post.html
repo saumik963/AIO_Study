@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+{% block title %}Create Post{% endblock %}
+{% block header %}Create Post{% endblock %}
+{% block body %}
+
+
+<div class="card draggable mb-4" style='background-color:#00000070;'>
+    <form enctype="multipart/form-data" method="POST" style="padding: 50px;">
+      {% csrf_token %}
+        {{form.media}}
+      <hr class="horizontal dark my-4">
+  
+      <h6 class="heading-small text-muted mb-4">You can post tips and suggations for all.</h6>
+      <div>
+        <div class="col-md-12">
+          <div class="form-group">
+            <label class="form-control-label" for="id_title">Post Title</label>
+            <input style='background-color:#00000070;' name="PostTitle" id="id_title" class="form-control" placeholder="Title" type="text"  required>
+           
+          </div>
+        </div>
+      </div>
+      <hr class="horizontal dark my-2">
+      <!-- Description -->
+      <div>
+        <div class="form-group">
+          <label class="form-control-label">Post Description</label>
+          {{form.Description}}
+          
+        </div>
+      </div>
+
+  {% comment %} coverImage {% endcomment %}
+     <div class="form-group">
+        <label >Select Post Cover Image</label>
+            <div class="input-group">
+            <input style='background-color:#00000070;' type="file" name='Coverimage' class="form-control" readonly ng-model="images" ng-click="browse()">
+            </div>
+    </div>
+
+  {% comment %} Multiple images {% endcomment %}
+
+    <div class="form-group">
+      <label >Select Images For Post</label>
+          <div class="input-group">
+          <input style='background-color:#00000070;' type="file" name='images' multiple  class="form-control" readonly ng-model="images" ng-click="browse()">
+          </div>
+           <button type="reset" class="btn btn-default" ng-click="reset()">Reset</button>
+  </div>
+
+
+      <div class="form-group">
+        <label class="form-control-label">Publish(Yes/No)</label>
+        <input type="hidden" name="is_post" value="False">
+        <input type="checkbox" id="is_post_checkbox" name="is_post" value="True">
+    </div>
+
+      <div class="col-0 text-end">
+        <button type='submit' class="btn btn-sm bg-gradient-primary mb-0">Post Publish</button>
+      </div>
+    </form>
+
+
+
+
+    {% for msg in messages %}
+<div class="alert alert-light alert-dismissible fade show" role="alert">
+    {{ msg }}
+    <svg type="button" data-dismiss="alert" aria-label="Close" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg close" viewBox="0 0 16 16">
+        <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+      </svg>
+</div>
+{% endfor %}
+
+
+
+    
+  </div>
+
+
+<!-- Include jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- Include Bootstrap JavaScript -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+
+
+{% endblock %}

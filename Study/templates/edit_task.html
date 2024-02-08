@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %}Edit Task{% endblock %}
+{% block header %}Edit Task{% endblock %}
+{% block body %}
+
+<div class="card draggable mb-4">
+    <form method="post" style="padding: 50px;">
+      {% csrf_token %}
+      
+
+
+      <hr class="horizontal dark my-4">
+  
+      <h6 class="heading-small text-muted mb-4">Edit Task</h6>
+      <div>
+        <div class="col-md-12">
+          <div class="form-group">
+            <label class="form-control-label" for="id_title">{{notes.Title.label}}</label>
+            <input style='background-color: #00000070;' name="Title" id="id_title" class="form-control" placeholder="Task to do" type="text" value="{{ notes.Title}}" required>
+           
+          </div>
+        </div>
+      </div>
+      <hr class="horizontal dark my-2">
+      <!-- Description -->
+      <div>
+        <div class="form-group">
+          <label class="form-control-label">Task Description</label>
+          <textarea style='background-color: #00000070;' name="Description" rows="4" class="form-control" placeholder="A few words about your task" required>{{ notes.Description}}</textarea>
+          
+        </div>
+      </div>
+      <div class="col-0 text-end">
+        <button type='submit' class="btn btn-sm bg-gradient-primary mb-0">Save Changes</button>
+      </div>
+    </form>
+    {% for msg in messages %}
+    <div class="alert alert-success" role="alert">
+      {{ msg }}
+    </div>
+    {% endfor %}
+  </div>
+
+{% endblock %}

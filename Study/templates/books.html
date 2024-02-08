@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block title %}Book Store{% endblock %}
+{% block header %}Books{% endblock %}
+{% block body %}
+
+{% comment %} https://www.googleapis.com/books/v1/volumes?q=Nobel {% endcomment %}
+
+{% comment %} search {% endcomment %}
+<h4 style="color: #d7e9e9ad;background-color: #0c0c0c;text-align: center;font-family: cursive;padding: 5px;border-radius: inherit;font-family: 'Quicksand', sans-serif;">You may use this search engine to look up Books.</h4>
+<div class="d-flex justify-content-center align-items-center">
+  <form method="post" class="form-inline">
+    {% csrf_token %}
+    <div class="input-group" style="
+    margin: 30px;
+">
+      <input style='background-color: #00000070;' name="text" class="form-control border-0 rounded-pill" type="search" placeholder="Search here" aria-label="Search">
+      <button type="submit" style="border-bottom-right-radius: 20px;border-top-right-radius: 20px;background-color: aqua;border: aliceblue;width: 50px;">
+        <i class="fas fa-search"></i>
+      </button>
+    </div>
+  </form>
+</div>
+
+
+{% comment %} search {% endcomment %}
+
+
+
+<div class="row" style='margin:auto;'>
+    {% for result in results %}
+      <div class="col-md-4 mb-4">
+        <div class="card h-100" style="height: 350px; overflow: hidden;background-color: #00000070;">
+          <div class="card-body p-3 text-center">
+            <a href='{{result.preview}}' target="_blank">
+              <img src="{{result.thumbnail}}" alt="{{result.title}}" class="img-fluid" style="border-radius: 20px; max-height: 200px;">
+            </a>
+            <h6 class="mt-3 mb-0"><a style="color: #d7e9e9ad;" href='{{result.preview}}' target="_blank">{{result.subtitle}}</a></h6>
+            <span style="
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;" class="text-xs">{{result.description}}</span>
+            <hr class="horizontal dark my-3">
+            <h5 class="mb-0">{{result.categories}} {{result.rating}}</h5>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+  
+
+{% endblock %}

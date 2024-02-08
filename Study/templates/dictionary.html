@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block title %}Dictionary{% endblock %}
+{% block header %}Dictionary{% endblock %}
+{% block body %}
+
+
+
+{% comment %} https://api.dictionaryapi.dev/api/v2/entries/en_US/ {% endcomment %}
+
+{% comment %} search {% endcomment %}
+<h4 style="color: #d7e9e9ad;background-color: #0c0c0c;text-align: center;font-family: cursive;padding: 5px;border-radius: inherit;font-family: 'Quicksand', sans-serif;">You may use this search engine to search words in Dictionary.</h4>
+<div class="d-flex justify-content-center align-items-center">
+  <form method="post" class="form-inline">
+    {% csrf_token %}
+    <div class="input-group" style="
+    margin: 30px;
+">
+      <input style='background-color: #00000070;' name="text" class="form-control border-0 rounded-pill" type="search" placeholder="Search here" aria-label="Search">
+      <button type="submit" style="border-bottom-right-radius: 20px;border-top-right-radius: 20px;background-color: aqua;border: aliceblue;width: 50px;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eyeglasses" viewBox="0 0 16 16">
+            <path d="M4 6a2 2 0 1 1 0 4 2 2 0 0 1 0-4zm2.625.547a3 3 0 0 0-5.584.953H.5a.5.5 0 0 0 0 1h.541A3 3 0 0 0 7 8a1 1 0 0 1 2 0 3 3 0 0 0 5.959.5h.541a.5.5 0 0 0 0-1h-.541a3 3 0 0 0-5.584-.953A1.993 1.993 0 0 0 8 6c-.532 0-1.016.208-1.375.547zM14 8a2 2 0 1 1-4 0 2 2 0 0 1 4 0z"/>
+          </svg>
+      </button>
+    </div>
+  </form>
+</div>
+
+
+{% comment %} search {% endcomment %}
+
+
+
+<div class="card" style='background-color: #00000070;'>
+    <div class="card-header" style='background-color: #00000070;'>
+      {{input}}
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">{{phonetics}}</h5>
+      <p class="card-text">Definitions: {{definition}}</p>
+      <p class="card-text">Example: {{example}}</p>
+      <audio id='player' src='{{audio}}'></audio>
+      <a onclick="document.getElementById('player').play()"  class="btn btn-primary"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-volume-up" viewBox="0 0 16 16">
+        <path d="M11.536 14.01A8.473 8.473 0 0 0 14.026 8a8.473 8.473 0 0 0-2.49-6.01l-.708.707A7.476 7.476 0 0 1 13.025 8c0 2.071-.84 3.946-2.197 5.303l.708.707z"/>
+        <path d="M10.121 12.596A6.48 6.48 0 0 0 12.025 8a6.48 6.48 0 0 0-1.904-4.596l-.707.707A5.483 5.483 0 0 1 11.025 8a5.483 5.483 0 0 1-1.61 3.89l.706.706z"/>
+        <path d="M10.025 8a4.486 4.486 0 0 1-1.318 3.182L8 10.475A3.489 3.489 0 0 0 9.025 8c0-.966-.392-1.841-1.025-2.475l.707-.707A4.486 4.486 0 0 1 10.025 8zM7 4a.5.5 0 0 0-.812-.39L3.825 5.5H1.5A.5.5 0 0 0 1 6v4a.5.5 0 0 0 .5.5h2.325l2.363 1.89A.5.5 0 0 0 7 12V4zM4.312 6.39 6 5.04v5.92L4.312 9.61A.5.5 0 0 0 4 9.5H2v-3h2a.5.5 0 0 0 .312-.11z"/>
+      </svg></a>
+      
+      <p>Synonyms:
+        {% for synonym in synonyms %}
+        {{synonym}}
+        {% endfor %}
+      </p>
+    </div>
+  </div>
+
+
+{% endblock %}

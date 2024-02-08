@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% block title %}Post Details{% endblock %}
+{% block header %}Post Details{% endblock %}
+{% block head %}
+
+<style>
+    .center {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh; /* Optional: Centers the form vertically on the page */
+    }
+    
+    .card {
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        width: 300px; /* Adjust the width as needed */
+    }
+    
+    .form-title {
+        text-align: center;
+        margin-bottom: 10px;
+    }
+    
+    .form-text {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    
+    .form-buttons {
+        display: flex;
+        justify-content: center;
+    }
+    
+</style>
+
+{% endblock %}
+
+{% block body %}
+<div class="center">
+    <form method="post" class="card">
+        {% csrf_token %}
+        <h2 class="form-title">Delete Comment!</h2>
+        <p class="form-text">Are you sure that you want to delete "{{ comment }}"?</p>
+        <div class="form-buttons">
+            <input type="submit" class="btn btn-primary" value="Delete">
+            <button type="button" class="btn btn-outline" onclick="goBack()">Cancel</button>
+        </div>
+    </form>
+</div>
+
+
+<script>
+    function goBack() {
+        window.history.back();
+    }
+</script>
+
+
+{% endblock %}
