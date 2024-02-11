@@ -30,23 +30,22 @@
         </div>
       </div>
 
-  {% comment %} coverImage {% endcomment %}
-     <div class="form-group">
-        <label >Select Post Cover Image</label>
-            <div class="input-group">
-            <input style='background-color:#00000070;' type="file" name='Coverimage' class="form-control" readonly ng-model="images" ng-click="browse()">
-            </div>
-    </div>
-
-  {% comment %} Multiple images {% endcomment %}
-
-    <div class="form-group">
-      <label >Select Images For Post</label>
-          <div class="input-group">
-          <input style='background-color:#00000070;' type="file" name='images' multiple  class="form-control" readonly ng-model="images" ng-click="browse()">
-          </div>
-           <button type="reset" class="btn btn-default" ng-click="reset()">Reset</button>
+  {% comment %} Cover Image {% endcomment %}
+<div class="form-group">
+  <label>Select Post Cover Image (Max 100KB)</label>
+  <div class="input-group">
+      <input style='background-color:#00000070;' type="file" name='Coverimage' class="form-control" accept="image/*" onchange="validateImageSize(event)">
   </div>
+</div>
+
+{% comment %} Multiple Images {% endcomment %}
+<div class="form-group">
+  <label>Select Images For Post (Max 100KB Each)</label>
+  <div class="input-group">
+      <input style='background-color:#00000070;' type="file" name='images' multiple class="form-control" accept="image/*" onchange="validateImagesSize(event)">
+  </div>
+  <button type="reset" class="btn btn-default" onclick="resetFileInputs()">Reset</button>
+</div>
 
 
       <div class="form-group">
@@ -84,7 +83,28 @@
 <!-- Include Bootstrap JavaScript -->
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
+<script>
+  function validateImageSize(event) {
+      const file = event.target.files[0];
+      if (file && file.size > 100 * 1024) {
+          alert('File size exceeds 100KB. Please select a smaller image.');
+          event.target.value = ''; // Clear the input field
+      }
+  }
 
+  function validateImagesSize(event) {
+      const files = Array.from(event.target.files);
+      const invalidFiles = files.filter(file => file.size > 100 * 1024);
+      if (invalidFiles.length > 0) {
+          alert('One or more files exceed 100KB in size. Please select smaller images.');
+          event.target.value = ''; // Clear the input field
+      }
+  }
+
+  function resetFileInputs() {
+      document.querySelectorAll('input[type="file"]').forEach(input => input.value = '');
+  }
+</script>
 
 
 {% endblock %}

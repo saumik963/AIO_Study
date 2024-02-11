@@ -17,9 +17,14 @@ class Post(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)
 
+    likes = models.ManyToManyField(User,related_name='like_post')
+
     def __str__(self):
         return f"{self.PostTitle} - {self.user}"
 
+    def total_likes(self):
+        return self.likes.count()
+    
 class PostImages(models.Model):
     post=models.ForeignKey(Post,default=None,on_delete=models.CASCADE)
     images=models.ImageField(upload_to='PostImages')

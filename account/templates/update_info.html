@@ -19,7 +19,7 @@
           <div class="row justify-content-center">
             <div class="col-lg-5 text-center mx-auto">
               <h1 class="text-white mb-2 mt-2">Welcome!</h1>
-              <p class="text-lead text-white">Use these awesome forms to login or create new account in your project for free.</p>
+              <p class="text-lead text-white">Make necessary updates to your profile. An ideal profile picture is less than 100 KB.</p>
             </div>
           </div>
         </div>
@@ -93,9 +93,9 @@
         var file = event.target.files[0];
         if (file) {
             var fileSize = file.size; // in bytes
-            var maxSizeInBytes = 1048576; // 1 MB
+            var maxSizeInBytes = 102400; // 100kb
             if (fileSize > maxSizeInBytes) {
-                alert('File size exceeds 1 MB. Please choose a smaller file.');
+                alert('File size exceeds 100 KB. Please choose a smaller file.');
                 event.target.value = ''; // Clear the input field
             }
         }

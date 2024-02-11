@@ -101,6 +101,125 @@
   }
 
 
+
+
+
+
+  
+  
+  /* CSS */
+.button-82-pushable {
+  position: relative;
+  border: none;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+  outline-offset: 4px;
+  transition: filter 250ms;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.button-82-shadow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
+  background: hsl(0deg 0% 0% / 0.25);
+  will-change: transform;
+  transform: translateY(2px);
+  transition:
+    transform
+    600ms
+    cubic-bezier(.3, .7, .4, 1);
+}
+
+.button-82-edge {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
+  background: linear-gradient(
+    to left,
+    hsl(340deg 100% 16%) 0%,
+    hsl(340deg 100% 32%) 8%,
+    hsl(340deg 100% 32%) 92%,
+    hsl(340deg 100% 16%) 100%
+  );
+}
+
+.button-82-front {
+  display: block;
+  position: relative;
+  padding: 12px 27px;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  color: white;
+  background: hsl(345deg 100% 47%);
+  will-change: transform;
+  transform: translateY(-4px);
+  transition:
+    transform
+    600ms
+    cubic-bezier(.3, .7, .4, 1);
+}
+
+@media (min-width: 768px) {
+  .button-82-front {
+    font-size: 14px;
+    padding: 3px 15px;
+  }
+}
+
+.button-82-pushable:hover {
+  filter: brightness(110%);
+  -webkit-filter: brightness(110%);
+}
+
+.button-82-pushable:hover .button-82-front {
+  transform: translateY(-6px);
+  transition:
+    transform
+    250ms
+    cubic-bezier(.3, .7, .4, 1.5);
+}
+
+.button-82-pushable:active .button-82-front {
+  transform: translateY(-2px);
+  transition: transform 34ms;
+}
+
+.button-82-pushable:hover .button-82-shadow {
+  transform: translateY(4px);
+  transition:
+    transform
+    250ms
+    cubic-bezier(.3, .7, .4, 1.5);
+}
+
+.button-82-pushable:active .button-82-shadow {
+  transform: translateY(1px);
+  transition: transform 34ms;
+}
+
+.button-82-pushable:focus:not(:focus-visible) {
+  outline: none;
+}
+
+
+.container {
+  display: flex;
+  justify-content: flex-start; /* Align items to the end of the flex container */
+  width: 100%; /* Optionally set width of container */
+  margin:10px;
+}
+
+
 </style>
 
 
@@ -144,7 +263,34 @@
       <h5 class="card-title" style='color: azure;'>{{ post.PostTitle }}</h5>
       <p class="card-text" style="white-space: break-spaces;">{{ post.Description | safe }}</p>
     </div>
-    <h5 style="margin-right: 75%; font-size: small; font-family: 'Mooli', sans-serif; color: #f3f3f36b;">Posted by: {{ post.user.username }}</h5>
+    
+    
+    
+    
+    <div class="container">
+      
+      {% if user.is_authenticated %}
+      <form action="{% url 'like_post' post.pk %}" method="post">
+        {% csrf_token %}
+      <button name='post_id' value='{{post.id}}' type="submit" class="button-82-pushable" > 
+        <span class="button-82-shadow"></span>
+        <span class="button-82-edge"></span>
+        <span class="button-82-front text">
+          {% if liked %}Unlike{% else %}Like{% endif %}</span></button>
+        </form>
+        {% endif %}
+        
+        <h5 style="margin: auto; font-size: small; font-family: 'Mooli', sans-serif; color: #f3f3f36b;">Likes: {{ post.total_likes }}</h5>
+        <h5 style="margin: auto; font-size: small; font-family: 'Mooli', sans-serif; color: #f3f3f36b;">Posted by: {{ post.user.username }}</h5>
+  </div>
+
+
+
+<!-- HTML !-->
+
+
+  
+    
   </div>
 </section>
 

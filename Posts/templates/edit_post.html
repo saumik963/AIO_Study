@@ -35,17 +35,17 @@
       {% comment %} coverImage {% endcomment %}
 
 
-    <div class="form-group">
-      <label >Select Post Cover Image</label>
-      {% if form.instance.Coverimage %}
-              <p>Currently: <a href="{{ form.instance.Coverimage.url }}">Click to view</a></p>
-          {% else %}
-              <p>No cover image currently selected.</p>
-          {% endif %}
-          <div class="input-group">
-          <input style='background-color:#00000070;' type="file" name='Coverimage' class="form-control" readonly ng-model="images" ng-click="browse()">
-          </div>
-  </div>
+      <div class="form-group">
+        <label>Select Post Cover Image (Max 100KB)</label>
+        {% if form.instance.Coverimage %}
+            <p>Currently: <a href="{{ form.instance.Coverimage.url }}">Click to view</a></p>
+        {% else %}
+            <p>No cover image currently selected.</p>
+        {% endif %}
+        <div class="input-group">
+            <input style='background-color:#00000070;' type="file" name='Coverimage' class="form-control" accept="image/*" onchange="validateImageSize(event)">
+        </div>
+    </div>
     
 
 
@@ -76,6 +76,14 @@
   </div>
 
 
-
+  <script>
+    function validateImageSize(event) {
+        const file = event.target.files[0];
+        if (file && file.size > 100 * 1024) {
+            alert('File size exceeds 100KB. Please select a smaller image.');
+            event.target.value = ''; // Clear the input field
+        }
+    }
+</script>
 
 {% endblock %}

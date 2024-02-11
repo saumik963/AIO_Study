@@ -19,7 +19,7 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['.vercel.app','127.0.0.1']
 
 AUTH_USER_MODEL = 'account.UserProfile'
 
@@ -37,7 +37,6 @@ INSTALLED_APPS = [
     'Study',
     'Posts',
     'ckeditor',
-    'django_ckeditor_5',
 ]
 
 MIDDLEWARE = [
@@ -83,12 +82,12 @@ DATABASES = {
 
 # DATABASES = {
 #     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'aio_database',
-#         'USER': 'aio_database_user',
-#         'PASSWORD': 'w4ZxemAdRgBDoToS1GDv3xzJ2u7N8423',
-#         'HOST': 'dpg-ckg166gl3its73b9ksv0-a', 
-#         'PORT': 5432,
+#         'ENGINE': os.environ.get("ENGINE"),
+#         'NAME': os.environ.get("NAME"),
+#         'USER': os.environ.get("USER"),
+#         'PASSWORD': os.environ.get("PASSWORD"),
+#         'HOST': os.environ.get("HOST"), 
+#         'PORT': os.environ.get("PORT"),
 #     }
 # }
 
