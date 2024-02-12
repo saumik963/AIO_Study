@@ -1,1 +1,0 @@
-web: gunicorn AIOstudy.wsgi --log-file -
