@@ -4,5 +4,8 @@ Requests==2.31.0
 wikipedia==1.4.0
 youtube_search_python==1.6.6
 django-ckeditor==6.7.0
+<<<<<<< HEAD
 psycopg2-binary==2.9.9
 Pillow==9.5.0
+=======
+>>>>>>> 779ef71a115f85333715120082e87b4d0329d2b4
