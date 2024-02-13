@@ -129,6 +129,7 @@ def NoteUpdate(request, pk):
 
     return render(request, 'edit_task.html', {'form': form, "notes": notes})
 
+from youtube_search import YoutubeSearch
 
 def Videos(request):
     if not request.user.is_authenticated:
@@ -137,26 +138,32 @@ def Videos(request):
         if request.method == "POST":
             form = search()
             text = request.POST['text']
-            video = VideosSearch(text, limit=16)
+
+
+
+            video = YoutubeSearch(text, max_results=30).to_dict()
+
+            
             result_list = []
-            for i in video.result()['result']:
+            for i in video:
                 result_dict = {
                     'input': text,
                     'title': i['title'],
                     'duration': i['duration'],
-                    'thumbnail': i['thumbnails'][0]['url'],
-                    'channel': i['channel']['name'],
-                    'link': i['link'],
-                    'views': i['viewCount']['short'],
-                    'published': i['publishedTime'],
+                    'thumbnail': i['thumbnails'][0],
+                    'channel': i['channel'],
+                    'link': "https://www.youtube.com/"+i["url_suffix"],
+                    'views': i['views'],
+                    'published': i['publish_time'],
                 }
 
-                desc = ''
-                if i['descriptionSnippet']:
-                    for j in i['descriptionSnippet']:
-                        desc += j['text']
-                result_dict['description'] = desc
+                # desc = ''
+                # if i['long_desc']:
+                #     for j in i['long_desc']:
+                #         desc += j['text']
+                # result_dict['description'] = desc
                 result_list.append(result_dict)
+
                 context = {
                     'form': form,
                     'yt_act': "active",
