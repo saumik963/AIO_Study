@@ -130,9 +130,11 @@ def NoteUpdate(request, pk):
     return render(request, 'edit_task.html', {'form': form, "notes": notes})
 
 import googleapiclient.discovery
+from dotenv import load_dotenv
+import os
 def ytAPI(text):
 
-    DEVELOPER_KEY = "AIzaSyAOYF_7a930oG6UFKWSQEOWfv2y-4AQew4"
+    DEVELOPER_KEY = os.environ.get("DEVELOPER_KEY")
 
     youtube = googleapiclient.discovery.build("youtube", "v3", developerKey=DEVELOPER_KEY)
 
