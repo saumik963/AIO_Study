@@ -129,7 +129,61 @@ def NoteUpdate(request, pk):
 
     return render(request, 'edit_task.html', {'form': form, "notes": notes})
 
-from youtube_search import YoutubeSearch
+import googleapiclient.discovery
+def ytAPI(text):
+
+    DEVELOPER_KEY = "AIzaSyAOYF_7a930oG6UFKWSQEOWfv2y-4AQew4"
+
+    youtube = googleapiclient.discovery.build("youtube", "v3", developerKey=DEVELOPER_KEY)
+
+    search_query = text
+    part = "snippet"
+
+    request = youtube.search().list(
+        part=part,
+        q=search_query,
+        type="video",
+        maxResults=30  # Adjust as needed
+    )
+
+    response = request.execute()
+
+    videos=[]
+
+    for item in response["items"]:
+        video_id = item["id"]["videoId"]
+        title = item["snippet"]["title"]
+        description = item["snippet"]["description"]
+        thumbnails = item["snippet"]["thumbnails"]
+
+
+        # Create video URL using the video ID
+        video_url = f"https://www.youtube.com/watch?v={video_id}"
+
+        channel_request = youtube.videos().list(
+        part="snippet",
+        id=video_id
+        )
+        channel_response = channel_request.execute()
+
+        # Access and extract channel name
+        channel_name = channel_response["items"][0]["snippet"]["channelTitle"]
+
+        thumbnail_url = thumbnails["medium"]["url"]
+
+
+        result_dict = {
+                    'input': text,
+                    'title': title,
+                    'thumbnail': thumbnail_url,
+                    'channel': channel_name,
+                    'link': video_url,
+                    'description': description,
+                }
+        videos.append(result_dict)
+
+    return videos
+
 
 def Videos(request):
     if not request.user.is_authenticated:
@@ -140,35 +194,13 @@ def Videos(request):
             text = request.POST['text']
 
 
+            result_list = ytAPI(text)
 
-            video = YoutubeSearch(text, max_results=30).to_dict()
-
-            
-            result_list = []
-            for i in video:
-                result_dict = {
-                    'input': text,
-                    'title': i['title'],
-                    'duration': i['duration'],
-                    'thumbnail': i['thumbnails'][0],
-                    'channel': i['channel'],
-                    'link': "https://www.youtube.com/"+i["url_suffix"],
-                    'views': i['views'],
-                    'published': i['publish_time'],
-                }
-
-                # desc = ''
-                # if i['long_desc']:
-                #     for j in i['long_desc']:
-                #         desc += j['text']
-                # result_dict['description'] = desc
-                result_list.append(result_dict)
-
-                context = {
-                    'form': form,
-                    'yt_act': "active",
-                    'results': result_list,
-                }
+            context = {
+                'form': form,
+                'yt_act': "active",
+                'results': result_list,
+            }
             return render(request, 'youtube.html', context)
 
         else:
